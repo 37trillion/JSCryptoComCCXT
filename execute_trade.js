@@ -1,6 +1,7 @@
 const ccxt = require('ccxt');
 const Web3 = require('web3');
 const BigNumber = require('bignumber.js');
+const { Logger } = require('./logger_component');
 
 // Initialize Crypto.com exchange object
 const exchange = new ccxt.cryptocom({
@@ -40,7 +41,7 @@ async function executeTrade() {
     const buyOrder = await exchange.createMarketBuyOrder(symbol, buyAmount);
 
     // Log the buy order details
-    console.log(`Buy order executed: Market ${symbol}, Amount: ${buyAmount}, Price: ${buyOrder.price}`);
+    Logger.log(`Buy order executed: Market ${symbol}, Amount: ${buyAmount}, Price: ${buyOrder.price}`);
 
     // Calculate the sell price
     const sellPrice = new BigNumber(buyOrder.price)
@@ -51,9 +52,9 @@ async function executeTrade() {
     const sellOrder = await exchange.createLimitSellOrder(symbol, buyAmount, sellPrice);
 
     // Log the sell order details
-    console.log(`Sell order executed: Market ${symbol}, Amount: ${buyAmount}, Price: ${sellPrice}`);
+    Logger.log(`Sell order executed: Market ${symbol}, Amount: ${buyAmount}, Price: ${sellPrice}`);
   } catch (error) {
-    console.error('An error occurred:', error);
+    Logger.error('An error occurred:', error);
   }
 }
 
