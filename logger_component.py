@@ -1,11 +1,17 @@
-class LoggerComponent {
-  constructor() {
-    // Initialize any required parameters for logging
+class Logger {
+  static log(message) {
+    console.log(`[INFO] ${message}`);
   }
 
-  // Implement logging methods
+  static error(message) {
+    console.error(`[ERROR] ${message}`);
+  }
+
+  static warn(message) {
+    console.warn(`[WARNING] ${message}`);
+  }
 }
 
 module.exports = {
-  LoggerComponent
+  Logger
 };
